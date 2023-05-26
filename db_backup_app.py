@@ -16,6 +16,8 @@ result = customtkinter.StringVar()
 CACHE_FILE = "cache.txt"
 
 def backup():
+    result.set("Exporting ...")
+    
     hostname = host_entry.get().strip()
     port = port_entry.get().strip()
     username = username_entry.get().strip()
