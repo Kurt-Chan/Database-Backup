@@ -87,8 +87,6 @@ title.pack(padx=10, pady=12)
 res_label = customtkinter.CTkLabel(root, textvariable = result)
 res_label.pack(padx=10, pady=5)
 
-# progressbar = customtkinter.CTkProgressBar(root, orientation="horizontal", mode="indeterminate")
-
 frame = customtkinter.CTkFrame(master=root)
 frame.pack(pady=20, padx=12, fill="both", expand=True)
 
