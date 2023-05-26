@@ -1,6 +1,0 @@
-hostname:localhost
-port:3306
-username:root
-password:12345
-backup_dir:D:\dbtest
-db:YOURDATABASE
