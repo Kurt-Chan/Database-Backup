@@ -7,7 +7,9 @@ customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("dark-blue")
 
 root = customtkinter.CTk()
-root.geometry("480x370")
+root.geometry("510x370")
+root.resizable(False, False)
+root.eval('tk::PlaceWindow . center')
 root.title("Workbench Database Backup")
 
 result = customtkinter.StringVar()
@@ -17,7 +19,6 @@ def backup():
     hostname = host_entry.get().strip()
     port = port_entry.get().strip()
     username = username_entry.get().strip()
-
     password = password_entry.get().strip()
     backup_dir = path_entry.get().strip()
     db = optionmenu.get().strip()
@@ -26,14 +27,11 @@ def backup():
     backup_file = f"backupdb_{current_date}.sql"
 
     command = f'mysqldump -h {hostname} -P {port} -u {username} -p{password} --routines --events --triggers {db} > {os.path.join(backup_dir, backup_file)}'
-
     return_code = subprocess.call(command, shell=True)
 
     if return_code == 0:
-        print(f"Backup created successfully at: {os.path.join(backup_dir, backup_file)}")
         result.set(f"Backup created successfully at: {os.path.join(backup_dir, backup_file)}")
     else:
-        print("Backup creation failed.")
         result.set("Backup creation failed.")
 
     data = {
@@ -147,9 +145,10 @@ optionmenu = customtkinter.CTkOptionMenu(master=frame, values=["csusisdb", "csuc
 optionmenu.grid(row=4, column=3, padx=5, sticky="e")
 
 # BUTTON
-submit_button = customtkinter.CTkButton(root, text="Export database", state="disabled", command=backup, fg_color="#042406")
+submit_button = customtkinter.CTkButton(root, text="Export database", state="normal", command=backup, fg_color="#265828")
 submit_button.pack(pady=12, padx=10)
 
+# GET THE CACHED DATA
 cached_data = load_cache()
 host_entry.insert(0, cached_data.get("hostname", ""))
 port_entry.insert(0, cached_data.get("port", ""))
